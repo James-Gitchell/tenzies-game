@@ -3,7 +3,13 @@ import './App.css';
 
 export default function App() {
   return(
-    <h1></h1>
+    <>
+      <div className="main">
+        <div className="center">
+          <div className="innerCircle"></div>
+        </div>
+      </div>
+    </>
   )
 }
 
