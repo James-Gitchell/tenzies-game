@@ -2,6 +2,16 @@ import React from "react"
 import Die from "./components/Die"
 import './App.css';
 import {nanoid} from "nanoid"
+import Confetti from "react-confetti"
+
+/*
+Devie Do List------------
+CSS: put real dots on the dice.
+Track the number of rolls
+Tract the time it took to win
+save your best time to local Storage
+-------------------------
+*/
 
 
 
@@ -10,7 +20,14 @@ export default function App() {
   const [ tenzies, setTenzies ] = React.useState(false)
    
   React.useEffect(()=> {
-  console.log('Dice State changed')
+ const allHeld = dice.every(die => die.isHeld)
+ const firstValue = dice[0].value
+ const allSameValue = dice.every(die => die.value === firstValue)
+ if(allHeld && allSameValue){
+  setTenzies(true)
+  console.log("You Won!")
+  
+ }
   }, [dice])
 
   function generateNewDie(){
@@ -29,13 +46,19 @@ export default function App() {
           return newDice
         }
  
-        function rollDice(){
-      setDice(oldDice => oldDice.map(die => {
-        return die.isHeld ? 
-        die :
-        generateNewDie()
-      }))
-    }
+    function rollDice(){
+        if(!tenzies){
+           setDice(oldDice => oldDice.map(die => {
+           return die.isHeld ? 
+           die :
+           generateNewDie()
+        })) } 
+        else {
+           setTenzies(false)
+           setDice(allNewDice())
+            }
+        
+          }
       
     function holdDice(id) {
       setDice(oldDice => oldDice.map(die => {
@@ -52,6 +75,7 @@ export default function App() {
   return(
     
      <main>
+      
       <h1 className="title">Tenzies</h1>
             <p className="instructions">
               Roll until all dice are the same.
@@ -60,8 +84,10 @@ export default function App() {
           {diceElements}
        </div>
        <button className="roll--dice" onClick={rollDice}>
-            Roll
+            {tenzies ? "New Game" : "Roll"}
        </button>
+       {tenzies && <Confetti />}
+      
      
      </main>
         
@@ -70,14 +96,3 @@ export default function App() {
   )
 }
 
-/*
-<Die value= {dice} />
-         <Die value= {dice} />
-         <Die value= {dice} />
-         <Die value= {dice} />
-         <Die value= {dice} />
-         <Die value= {dice} />
-         <Die value= {dice} />
-         <Die value= {dice} />
-         <Die value= {dice} />   
-               */
