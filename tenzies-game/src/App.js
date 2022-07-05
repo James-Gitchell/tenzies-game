@@ -7,6 +7,11 @@ import {nanoid} from "nanoid"
 
 export default function App() {
   const [ dice, setDice ] = React.useState(allNewDice())
+  const [ tenzies, setTenzies ] = React.useState(false)
+   
+  React.useEffect(()=> {
+  console.log('Dice State changed')
+  }, [dice])
 
   function generateNewDie(){
     return {
