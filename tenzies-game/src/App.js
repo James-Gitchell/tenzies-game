@@ -4,6 +4,7 @@ import './App.css';
 
 
 export default function App() {
+  const [ dice, setDice ] = React.useState(allNewDice())
  function allNewDice() {
       const newDice = []
       for (let i = 0; i < 10; i++) {
@@ -11,7 +12,7 @@ export default function App() {
       }
       return newDice
      }
- console.log(allNewDice())
+const diceElements = dice.map(die => <Die value={die} /> )
 
   
   
@@ -20,16 +21,7 @@ export default function App() {
     
      <main>
        <div className="dice--container">
-         <Die value= "1" />
-         <Die value= "2" />
-         <Die value= "3" />
-         <Die value= "4" />
-         <Die value= "5" />
-         <Die value= "6" />
-         <Die value= "5" />
-         <Die value= "4" />
-         <Die value= "3" />
-         <Die value= "1" />   
+       {diceElements}
                
        </div>
      </main>
@@ -39,4 +31,14 @@ export default function App() {
   )
 }
 
-
+/*
+<Die value= {dice} />
+         <Die value= {dice} />
+         <Die value= {dice} />
+         <Die value= {dice} />
+         <Die value= {dice} />
+         <Die value= {dice} />
+         <Die value= {dice} />
+         <Die value= {dice} />
+         <Die value= {dice} />   
+               */
