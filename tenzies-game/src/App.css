@@ -31,7 +31,7 @@ display:flex;
 justify-content: space-around;
 align-items: center;
 cursor: pointer;
-background-color: whiteS;
+
 }
 .die--num {
   font-size:2rem;
